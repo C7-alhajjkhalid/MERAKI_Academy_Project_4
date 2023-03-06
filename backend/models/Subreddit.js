@@ -18,13 +18,17 @@ const subredditSchema = mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  members: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  }],
+  members: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
 });
+
+module.exports = mongoose.Model("Subreddit", subredditSchema);
