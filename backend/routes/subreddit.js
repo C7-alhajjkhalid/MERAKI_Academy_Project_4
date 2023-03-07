@@ -1,11 +1,19 @@
 const express = require("express");
 const subredditRouter = express.Router();
+const {
+  newSubreddit,
+  getSubscribedSubreddits,
+  getAllSubreddits,
+  getSubredditById,
+  deleteSubredditById,
+  updateSubredditById,
+} = require("../controllers/subreddit");
 
-subredditRouter.post("/");
-subredditRouter.get("/subscribed");
-subredditRouter.get("/all");
-subredditRouter.get("/:id");
-subredditRouter.delete("/:id");
-subredditRouter.put("/:id");
+subredditRouter.post("/", newSubreddit);
+subredditRouter.get("/subscribed", getSubscribedSubreddits);
+subredditRouter.get("/all", getAllSubreddits);
+subredditRouter.get("/:id", getSubredditById);
+subredditRouter.delete("/:id", deleteSubredditById);
+subredditRouter.put("/:id", updateSubredditById);
 
 module.exports = subredditRouter;
