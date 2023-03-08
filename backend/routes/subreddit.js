@@ -4,7 +4,7 @@ const {
   newSubreddit,
   getSubscribedSubreddits,
   getAllSubreddits,
-  getSubredditById,
+  // getSubredditById,
   deleteSubredditById,
   updateSubredditById,
 } = require("../controllers/subreddit");
@@ -12,7 +12,7 @@ const {
 subredditRouter.post("/", newSubreddit);
 subredditRouter.get("/subscribed", getSubscribedSubreddits);
 subredditRouter.get("/all", getAllSubreddits);
-subredditRouter.get("/:id", getSubredditById);
+// subredditRouter.get("/:id", getSubredditById);
 subredditRouter.delete("/:id", deleteSubredditById);
 subredditRouter.put("/:id", updateSubredditById);
 

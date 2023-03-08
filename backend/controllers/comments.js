@@ -3,6 +3,7 @@ const getAllComments = (req, res) => {};
 const getCommentById = (req, res) => {};
 const updateCommentById = (req, res) => {};
 const deleteCommentById = (req, res) => {};
+const getCommentsByPostId = (req, res) => {};
 
 module.exports = {
   newComment,
@@ -10,4 +11,5 @@ module.exports = {
   getCommentById,
   updateCommentById,
   deleteCommentById,
+  getCommentsByPostId,
 };

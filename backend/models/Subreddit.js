@@ -31,4 +31,4 @@ const subredditSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.Model("Subreddit", subredditSchema);
+module.exports = mongoose.model("Subreddit", subredditSchema);

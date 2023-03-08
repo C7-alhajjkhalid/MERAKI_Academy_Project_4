@@ -1,15 +1,82 @@
-const newSubreddit = (req, res) => {};
-const getSubscribedSubreddits = (req, res) => {};
-const getAllSubreddits = (req, res) => {};
-const getSubredditById = (req, res) => {};
-const deleteSubredditById = (req, res) => {};
-const updateSubredditById = (req, res) => {};
+const subredditModel = require("../models/Subreddit");
+const Posts = require("../models/PostSchema");
+
+const newSubreddit = (req, res) => {
+  const { name, description, creator } = req.body;
+  const newSub = subredditModel({ name, description, creator });
+  newSub
+    .save()
+    .then((result) => {
+      res.json({ success: true, result });
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
+const getSubscribedSubreddits = (req, res) => {
+  const userId = req.userId;
+
+  subredditModel
+    .find({ members: userId })
+    .select("name description")
+    .populate("creator", "username")
+    .exec()
+    .then((result) => {
+      res.status(200).json({ success: true, result });
+    })
+    .catch((err) => {
+      res.status(401).json({ success: false, err });
+    });
+};
+
+const getAllSubreddits = (req, res) => {
+  subredditModel
+    .find()
+    .then((result) => {
+      res.status(200).json({ success: true, result });
+    })
+    .catch((err) => {
+      res.status(401).json({ success: false, err });
+    });
+};
+
+// const getSubredditById = (req, res) => {
+//   const subId =
+// };
+
+//needs update
+const deleteSubredditById = (req, res) => {
+  let subId = req.params.id;
+  subredditModel
+    .findByIdAndRemove(subId)
+    .then((result) => {
+      res.status(200).json({ success: true, result });
+    })
+    .catch((err) => {
+      res.status(401).json({ success: false, err });
+    });
+};
+
+//needs update
+const updateSubredditById = (req, res) => {
+  let subId = req.params.id;
+  const newData = req.body;
+  subredditModel
+    .findByIdAndUpdate({ _id: subId }, req.body, { new: true })
+    .then((result) => {
+      res.status(200).json({ success: true, result });
+    })
+    .catch((err) => {
+      res.status(401).json({ success: false, err });
+    });
+};
 
 module.exports = {
   newSubreddit,
   getSubscribedSubreddits,
   getAllSubreddits,
-  getSubredditById,
+  // getSubredditById,
   deleteSubredditById,
   updateSubredditById,
 };
