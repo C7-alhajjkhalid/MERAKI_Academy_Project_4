@@ -26,13 +26,15 @@ function App() {
           setUserID,
         }}
       >
-        <div className="App">
-          <Header />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/Home" element={<Home />} />
-          </Routes>
+        <Header />
+        <div className="mainContainer">
+          <div className="App">
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/Home" element={<Home />} />
+            </Routes>
+          </div>
         </div>
       </GlobalContext.Provider>
     </>

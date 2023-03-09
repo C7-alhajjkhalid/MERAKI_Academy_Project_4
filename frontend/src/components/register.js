@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Form, Button, Col, Row } from "react-bootstrap";
+import { Form, Button, Col, Row, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
@@ -10,7 +10,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [message, setMessage] = useState("");
+  const [alert, setAlert] = useState("");
+  const [alertmsg, setAlertmsg] = useState("");
   useEffect(() => {
     context.isLoggedIn && navigate("/home");
   }, []);
@@ -29,6 +30,27 @@ const Register = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    axios
+      .post("http://localhost:5000/users/register", {
+        email,
+        password,
+        username,
+      })
+      .then((result) => {
+        // navigate("/");
+        setAlert("success");
+        setAlertmsg(
+          "Registered successfully, you will now be directed to Login page"
+        );
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      })
+      .catch((err) => {
+        console.log(err);
+        setAlert("danger");
+        setAlertmsg("The email already exists or is not in correct format");
+      });
   };
 
   return (
@@ -70,16 +92,8 @@ const Register = () => {
           <br />
           <Form>
             <Button
-              onClick={() => {
-                axios
-                  .post("http://localhost:5000/users/register", {
-                    email,
-                    password,
-                    username,
-                  })
-                  .then((result) => {
-                    navigate("/");
-                  });
+              onClick={(e) => {
+                handleSubmit(e);
               }}
               variant="primary"
               type="submit"
@@ -89,6 +103,8 @@ const Register = () => {
             </Button>
           </Form>
         </Form>
+        <br />
+        <Alert variant={alert}>{alertmsg}</Alert>
       </div>
     </>
   );

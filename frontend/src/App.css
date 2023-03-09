@@ -3,8 +3,12 @@ body {
 }
 
 .loginForm {
+  width: 50vw;
+
+  padding: 15px;
+}
+
+.mainContainer {
+  justify-content: center;
   display: flex;
-  width: 50%;
-  flex-direction: column;
-  padding: 10px;
 }
