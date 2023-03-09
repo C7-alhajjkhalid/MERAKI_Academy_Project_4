@@ -1,3 +1,10 @@
-body{
-    text-align: center;
+body {
+  text-align: center;
+}
+
+.loginForm {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  padding: 10px;
 }
