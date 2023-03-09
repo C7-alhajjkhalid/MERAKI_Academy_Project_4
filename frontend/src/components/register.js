@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../App";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const context = useContext(GlobalContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [message, setMessage] = useState("");
+  useEffect(() => {
+    context.isLoggedIn && navigate("/home");
+  }, []);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -60,7 +69,22 @@ const Register = () => {
           </Form.Group>
           <br />
           <Form>
-            <Button variant="primary" type="submit" block>
+            <Button
+              onClick={() => {
+                axios
+                  .post("http://localhost:5000/users/register", {
+                    email,
+                    password,
+                    username,
+                  })
+                  .then((result) => {
+                    navigate("/");
+                  });
+              }}
+              variant="primary"
+              type="submit"
+              block
+            >
               Sign Up
             </Button>
           </Form>

@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
+import { useNavigate, Link } from "react-router-dom";
+import { GlobalContext } from "../App";
+
 const Header = () => {
+  const context = useContext(GlobalContext);
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -12,8 +17,24 @@ const Header = () => {
             <Nav.Link href="/">Home</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/register">Register</Nav.Link>
+            {!context.token ? <Nav.Link href="/login">Login</Nav.Link> : null}
+            {!context.token ? (
+              <Nav.Link href="/register">Register</Nav.Link>
+            ) : null}
+            {context.token ? (
+              <Nav.Link
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  context.setIsLoggedIn(false);
+                  context.setToken(null);
+
+                  localStorage.removeItem("loggedIn");
+                }}
+                to="/login"
+              >
+                Log Out
+              </Nav.Link>
+            ) : null}
           </Nav>
         </Navbar.Collapse>
       </Container>
