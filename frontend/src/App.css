@@ -3,8 +3,9 @@ body {
 }
 
 .loginForm {
-  width: 50vw;
-
+  width: 40vw;
+  max-width: 500px;
+  min-width: 250px;
   padding: 15px;
 }
 
