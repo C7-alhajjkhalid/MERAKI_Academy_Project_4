@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useState, createContext, useEffect } from "react";
 import Login from "./components/Login";
-
+import axios from "axios";
 import Register from "./components/Register";
 import Header from "./components/Header";
 import PostList from "./components/PostList";
@@ -15,14 +15,23 @@ function App() {
     localStorage.getItem("loggedIn")
   );
   const [userID, setUserID] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   // useEffect(() => {
   //   !token && navigate("/login");
   // }, []);
-  const Lists = [
-    { id: 5, name: "hello", description: "theDescription" },
-    { id: 6, name: "hello2", description: "theDescription2" },
-  ];
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/posts")
+      .then((result) => {
+        setPosts(result.data.result);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
+
   return (
     <>
       <GlobalContext.Provider
@@ -45,7 +54,7 @@ function App() {
           </div>
         </div>
         <br />
-        <PostList posts={Lists} />
+        <PostList props={posts} />
       </GlobalContext.Provider>
     </>
   );

@@ -1,9 +1,9 @@
-const subredditModel = require("../models/Subreddit");
+const subredditModel = require("../models/SubredditSchema");
 const Posts = require("../models/PostSchema");
 
 const newSubreddit = (req, res) => {
   const { name, description, creator } = req.body;
-  const newSub = subredditModel({ name, description, creator });
+  const newSub = new subredditModel({ name, description, creator });
   newSub
     .save()
     .then((result) => {
@@ -62,6 +62,9 @@ const deleteSubredditById = (req, res) => {
 const updateSubredditById = (req, res) => {
   let subId = req.params.id;
   const newData = req.body;
+  Object.keys(newData).forEach((key) => {
+    newData[key] == "" && delete newData[key];
+  });
   subredditModel
     .findByIdAndUpdate({ _id: subId }, req.body, { new: true })
     .then((result) => {

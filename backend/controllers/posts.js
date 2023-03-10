@@ -1,17 +1,18 @@
 const postsModel = require("../models/PostSchema");
 
 const newPost = (req, res) => {
-  const { title, content } = req.body;
-  const newPost = postsModel({ title, content });
+  const { title, content, subreddit, author } = req.body;
+  const newPost = new postsModel({ title, content, subreddit, author });
   newPost
     .save()
     .then((result) => {
-      res.json({ success: true, result });
+      res.status(201).json({ success: true, result });
     })
     .catch((err) => {
-      throw err;
+      res.status(401).json({ success: false, err });
     });
 };
+
 const getAllPosts = (req, res) => {
   postsModel
     .find()
@@ -60,8 +61,33 @@ const getPostById = (req, res) => {
       res.status(401).json({ success: false, err });
     });
 };
-const deletePostById = (req, res) => {};
-const updatePostById = (req, res) => {};
+const deletePostById = (req, res) => {
+  let subId = req.params.id;
+  postsModel
+    .findByIdAndRemove(subId)
+    .then((result) => {
+      res.status(200).json({ success: true, result });
+    })
+    .catch((err) => {
+      res.status(401).json({ success: false, err });
+    });
+};
+
+const updatePostById = (req, res) => {
+  let postId = req.params.id;
+  const newData = req.body;
+  Object.keys(newData).forEach((key) => {
+    newData[key] == "" && delete newData[key];
+  });
+  subredditModel
+    .findByIdAndUpdate({ _id: postId }, req.body, { new: true })
+    .then((result) => {
+      res.status(200).json({ success: true, result });
+    })
+    .catch((err) => {
+      res.status(401).json({ success: false, err });
+    });
+};
 
 module.exports = {
   newPost,

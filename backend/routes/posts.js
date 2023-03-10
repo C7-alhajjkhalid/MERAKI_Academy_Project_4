@@ -10,7 +10,7 @@ const {
 } = require("../controllers/posts");
 
 postsRouter.post("/", newPost);
-// postsRouter.get("/", getAllPosts);
+postsRouter.get("/", getAllPosts);
 postsRouter.get("/:subId", getPostsBySubId);
 postsRouter.get("/:id", getPostById);
 postsRouter.delete("/:id", deletePostById);

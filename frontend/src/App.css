@@ -13,3 +13,7 @@ body {
   justify-content: center;
   display: flex;
 }
+
+.postCard {
+  margin: 15px;
+}
