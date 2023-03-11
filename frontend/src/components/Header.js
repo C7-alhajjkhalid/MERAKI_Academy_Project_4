@@ -22,7 +22,9 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/all">All Posts</Nav.Link>
-            <Nav.Link href="/subscribed">Subscribed</Nav.Link>
+            {context.token ? (
+              <Nav.Link href="/subscribed">Subscribed</Nav.Link>
+            ) : null}
           </Nav>
           <Nav>
             {!context.token ? <Nav.Link href="/login">Login</Nav.Link> : null}

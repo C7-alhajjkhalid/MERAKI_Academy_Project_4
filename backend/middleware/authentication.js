@@ -12,7 +12,7 @@ const authentication = (req, res, next) => {
 
     req.userId = decryptedToken.userId;
     req.username = decryptedToken.username;
-    req.subreddits = decryptedToken.subreddits;
+    
     
 
     next();

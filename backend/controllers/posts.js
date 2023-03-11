@@ -94,11 +94,14 @@ const updatePostById = (req, res) => {
     });
 };
 
-const getSubscribedPosts = (req, res) => {
-  console.log(req.subreddits);
+const getSubscribedPosts = async (req, res) => {
+  const userId = req.userId;
+  const userSubreddits = await usersModel.findById(userId).select("subreddits");
+  console.log(userSubreddits);
+
   postsModel
     .find()
-    .where({ subreddit: req.subreddits })
+    .where({ subreddit: userSubreddits.subreddits })
     .then((result) => {
       res.status(200).json({ success: true, result });
     })

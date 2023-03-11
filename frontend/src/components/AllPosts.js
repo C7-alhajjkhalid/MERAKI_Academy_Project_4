@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <>
       <div>
-        <PostList props={context.posts} />
+        <PostList posts={context.posts} />
       </div>
     </>
   );

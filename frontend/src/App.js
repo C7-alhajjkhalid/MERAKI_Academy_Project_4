@@ -18,7 +18,7 @@ function App() {
   );
   const [userID, setUserID] = useState(null);
   const [posts, setPosts] = useState([]);
-
+  const [subscribedPosts, setSubscribedPosts] = useState([]);
   // useEffect(() => {
   //   !token && navigate("/login");
   // }, []);
@@ -35,6 +35,8 @@ function App() {
           setUserID,
           posts,
           setPosts,
+          subscribedPosts,
+          setSubscribedPosts,
         }}
       >
         <Header />

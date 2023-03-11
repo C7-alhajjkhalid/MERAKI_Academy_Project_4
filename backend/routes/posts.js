@@ -13,7 +13,7 @@ const authentication = require("../middleware/authentication");
 
 postsRouter.post("/", authentication, newPost);
 postsRouter.get("/", getAllPosts);
-postsRouter.get("/subcribed", authentication, getSubscribedPosts);
+postsRouter.get("/subscribed", authentication, getSubscribedPosts);
 postsRouter.get("/:subId", getPostsBySubId);
 postsRouter.get("/:id", getPostById);
 postsRouter.delete("/:id", deletePostById);
