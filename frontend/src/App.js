@@ -1,11 +1,13 @@
 import "./App.css";
 import React, { useState, createContext, useEffect } from "react";
 import Login from "./components/Login";
+import Home from "./components/AllPosts";
 import axios from "axios";
 import Register from "./components/Register";
 import Header from "./components/Header";
 import PostList from "./components/PostList";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import Subscribed from "./components/Subscribed";
 export const GlobalContext = createContext();
 
 function App() {
@@ -21,17 +23,6 @@ function App() {
   //   !token && navigate("/login");
   // }, []);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/posts")
-      .then((result) => {
-        setPosts(result.data.result);
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }, []);
-
   return (
     <>
       <GlobalContext.Provider
@@ -42,19 +33,22 @@ function App() {
           isLoggedIn,
           userID,
           setUserID,
+          posts,
+          setPosts,
         }}
       >
         <Header />
         <div className="mainContainer">
-          <div className="App">
+          <div>
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/all" element={<Home />} />
+              <Route path="/subscribed" element={<Subscribed />} />
               <Route path="/register" element={<Register />} />
             </Routes>
           </div>
         </div>
         <br />
-        <PostList props={posts} />
       </GlobalContext.Provider>
     </>
   );

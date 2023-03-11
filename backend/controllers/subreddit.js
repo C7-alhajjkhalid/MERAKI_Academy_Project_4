@@ -2,7 +2,8 @@ const subredditModel = require("../models/SubredditSchema");
 const Posts = require("../models/PostSchema");
 
 const newSubreddit = (req, res) => {
-  const { name, description, creator } = req.body;
+  const { name, description } = req.body;
+  const creator = req.userId;
   const newSub = new subredditModel({ name, description, creator });
   newSub
     .save()

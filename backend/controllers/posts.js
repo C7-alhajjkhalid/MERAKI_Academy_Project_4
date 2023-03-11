@@ -1,7 +1,10 @@
 const postsModel = require("../models/PostSchema");
+const subredditModel = require("../models/SubredditSchema");
+const usersModel = require("../models/UserSchema");
 
 const newPost = (req, res) => {
-  const { title, content, subreddit, author } = req.body;
+  const { title, content, subreddit } = req.body;
+  const author = req.userId;
   const newPost = new postsModel({ title, content, subreddit, author });
   newPost
     .save()
@@ -14,8 +17,10 @@ const newPost = (req, res) => {
 };
 
 const getAllPosts = (req, res) => {
+  console.log("hi");
   postsModel
     .find()
+    .populate("subreddit")
     .then((result) => {
       res.status(200).json({ success: true, result });
     })
@@ -89,6 +94,19 @@ const updatePostById = (req, res) => {
     });
 };
 
+const getSubscribedPosts = (req, res) => {
+  console.log(req.subreddits);
+  postsModel
+    .find()
+    .where({ subreddit: req.subreddits })
+    .then((result) => {
+      res.status(200).json({ success: true, result });
+    })
+    .catch((err) => {
+      res.status(401).json({ success: false, err });
+    });
+};
+
 module.exports = {
   newPost,
   getAllPosts,
@@ -96,4 +114,5 @@ module.exports = {
   getPostById,
   deletePostById,
   updatePostById,
+  getSubscribedPosts,
 };

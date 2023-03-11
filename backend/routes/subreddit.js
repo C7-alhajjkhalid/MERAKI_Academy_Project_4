@@ -8,8 +8,9 @@ const {
   deleteSubredditById,
   updateSubredditById,
 } = require("../controllers/subreddit");
+const authentication = require("../middleware/authentication")
 
-subredditRouter.post("/", newSubreddit);
+subredditRouter.post("/", authentication, newSubreddit);
 subredditRouter.get("/subscribed", getSubscribedSubreddits);
 subredditRouter.get("/all", getAllSubreddits);
 // subredditRouter.get("/:id", getSubredditById);

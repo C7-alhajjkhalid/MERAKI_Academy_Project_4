@@ -48,6 +48,7 @@ const login = async (req, res) => {
       userId: user._id,
       username: user.username,
       email: user.email,
+      subreddits: user.subreddits,
     };
     const options = {
       expiresIn: "60m",
@@ -66,4 +67,23 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const subscribeNewSub = (req, res) => {
+  const newSubId = req.params.id;
+  usersModel
+    .findByIdAndUpdate(
+      { _id: req.userId },
+      { $push: { subreddits: newSubId } },
+      { new: true }
+    )
+    .then((result) => {
+      res.status(201).json({
+        success: true,
+        message: "Subscribed successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+
+module.exports = { register, login, subscribeNewSub };

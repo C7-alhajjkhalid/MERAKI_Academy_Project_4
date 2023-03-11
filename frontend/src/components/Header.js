@@ -21,7 +21,8 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            
+            <Nav.Link href="/all">All Posts</Nav.Link>
+            <Nav.Link href="/subscribed">Subscribed</Nav.Link>
           </Nav>
           <Nav>
             {!context.token ? <Nav.Link href="/login">Login</Nav.Link> : null}

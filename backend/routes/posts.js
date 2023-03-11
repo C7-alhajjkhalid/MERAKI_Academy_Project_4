@@ -7,10 +7,13 @@ const {
   getPostById,
   deletePostById,
   updatePostById,
+  getSubscribedPosts,
 } = require("../controllers/posts");
+const authentication = require("../middleware/authentication");
 
-postsRouter.post("/", newPost);
+postsRouter.post("/", authentication, newPost);
 postsRouter.get("/", getAllPosts);
+postsRouter.get("/subcribed", authentication, getSubscribedPosts);
 postsRouter.get("/:subId", getPostsBySubId);
 postsRouter.get("/:id", getPostById);
 postsRouter.delete("/:id", deletePostById);

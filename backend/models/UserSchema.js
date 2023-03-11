@@ -25,6 +25,12 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  subreddits: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "subreddit",
+    },
+  ],
 });
 
 userSchema.pre("save", async function () {
