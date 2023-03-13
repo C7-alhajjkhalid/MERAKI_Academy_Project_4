@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Container,
   Row,
@@ -11,10 +11,13 @@ import {
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { GlobalContext } from "../App";
 
 const Post = () => {
+  const context = useContext(GlobalContext);
   const { id } = useParams();
   const [postDetails, setPostDetails] = useState();
+  const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
     axios
@@ -80,10 +83,36 @@ const Post = () => {
                 as="textarea"
                 rows={3}
                 placeholder="Enter your comment"
+                onChange={(e) => {
+                  setNewComment(e.target.value);
+                }}
               />
             </Form.Group>
             <br />
-            <Button variant="primary" type="submit">
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+         
+                axios
+                  .post(
+                    "http://localhost:5000/comments",
+                    {
+                      content: newComment,
+                      post: id,
+                    },
+                    { headers: { Authorization: `Bearer ${context.token}` } }
+                  )
+
+                  .then((result) => {
+                    console.log("success");
+                  })
+                  .catch((err) => {
+                    throw err;
+                  });
+              }}
+            >
               Add Comment
             </Button>
           </Form>

@@ -1,23 +1,35 @@
 const jwt = require("jsonwebtoken");
 
+// This function checks if the user logged in
 const authentication = (req, res, next) => {
   try {
     if (!req.headers.authorization) {
-      res.json("token required");
+      return res.status(403).json({
+        success: false,
+        message: `Forbidden`,
+      });
     }
-
     const token = req.headers.authorization.split(" ").pop();
 
-    const decryptedToken = jwt.verify(token, process.env.SECRET);
-
-    req.userId = decryptedToken.userId;
-    req.username = decryptedToken.username;
-    
-    
-
-    next();
+    jwt.verify(token, process.env.SECRET, (err, result) => {
+      if (err) {
+        res.status(403).json({
+          success: false,
+          message: `The token is invalid or expired`,
+        });
+      } else {
+        req.token = result;
+        req.userId = result.userId;
+        req.username = result.username;
+        next();
+      }
+    });
   } catch (err) {
-    res.status(401).json({ error: "authentication failed" });
+    res.status(500).json({
+      success: false,
+      message: `Server Error`,
+      err: err.message,
+    });
   }
 };
 
