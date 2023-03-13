@@ -43,7 +43,7 @@ const getPostsBySubId = (req, res) => {
 };
 
 const getPostById = (req, res) => {
-  console.log("h")
+  console.log("h");
   const postId = req.params.id;
   console.log(postId);
   postsModel
@@ -52,13 +52,7 @@ const getPostById = (req, res) => {
     .populate("author", "username")
     .populate("upvotes", "username")
     .populate("downvotes", "username")
-    .populate({
-      path: "comments",
-      populate: {
-        path: "author",
-        select: "username",
-      },
-    })
+    .populate("comments")
     .exec()
     .then((result) => {
       res.status(200).json({ success: true, result });

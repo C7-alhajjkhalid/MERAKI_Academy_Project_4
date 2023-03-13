@@ -3,14 +3,15 @@ const commentsRouter = express.Router();
 
 const {
   newComment,
-  getAllComments,
+  // getAllComments,
   getCommentById,
   updateCommentById,
   deleteCommentById,
-  getCommentsByPostId
+  getCommentsByPostId,
 } = require("../controllers/comments");
+const authentication = require("../middleware/authentication");
 
-commentsRouter.post("/", newComment);
+commentsRouter.post("/", authentication, newComment);
 // commentsRouter.get("/", getAllComments);
 commentsRouter.get("/post/:id", getCommentsByPostId);
 commentsRouter.get("/:id", getCommentById);

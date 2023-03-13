@@ -54,31 +54,18 @@ const Post = () => {
           </Card>
         </Col>
       </Row>
-
       <Row className="my-3">
         <Col>
-          <h3>Comments:</h3>
+          <h3>Comments</h3>
           <ListGroup>
-            <ListGroupItem>
-              <strong>Commenter Name</strong>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut
-                gravida leo. Praesent tincidunt purus eu congue ullamcorper.
-                Fusce volutpat metus magna, eget luctus arcu vestibulum sed.
-                Proin commodo nulla nec risus dignissim, ac feugiat massa
-                efficitur. Praesent euismod semper purus.
-              </p>
-            </ListGroupItem>
-            <ListGroupItem>
-              <strong>Another Commenter Name</strong>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut
-                gravida leo. Praesent tincidunt purus eu congue ullamcorper.
-                Fusce volutpat metus magna, eget luctus arcu vestibulum sed.
-                Proin commodo nulla nec risus dignissim, ac feugiat massa
-                efficitur. Praesent euismod semper purus.
-              </p>
-            </ListGroupItem>
+            {postDetails.comments.map((comment) => {
+              return (
+                <ListGroupItem>
+                  <strong>{comment.author}</strong>
+                  <p>{comment.content}</p>
+                </ListGroupItem>
+              );
+            })}
           </ListGroup>
         </Col>
       </Row>

@@ -4,7 +4,7 @@ const Post = require("../models/PostSchema");
 const newComment = async (req, res) => {
   try {
     const { content, post } = req.body;
-    const userId = req.userId;
+    const author = req.userId;
     const postExists = await Post.exists({ _id: post });
     if (!postExists) {
       return res.status(404).json({ error: "Post not found" });
@@ -13,7 +13,7 @@ const newComment = async (req, res) => {
     const comment = new commentsModel({
       content,
       post,
-      author: userId,
+      author,
     });
     const savedComment = await comment.save();
 
