@@ -15,7 +15,7 @@ postsRouter.post("/", authentication, newPost);
 postsRouter.get("/", getAllPosts);
 postsRouter.get("/subscribed", authentication, getSubscribedPosts);
 postsRouter.get("/:subId", getPostsBySubId);
-postsRouter.get("/:id", getPostById);
+postsRouter.get("/find/:id", getPostById);
 postsRouter.delete("/:id", deletePostById);
 postsRouter.put("/:id", updatePostById);
 

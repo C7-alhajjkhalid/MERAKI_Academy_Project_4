@@ -3,10 +3,10 @@ import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const PostList = ({ posts }) => {
-  console.log(posts);
   if (!posts) {
     return <p>loading</p>;
   }
+
   return (
     <div>
       {posts.map((post) => (
@@ -14,8 +14,10 @@ const PostList = ({ posts }) => {
           <Card.Body>
             <Card.Title>{post.title}</Card.Title>
             <Card.Text>{post.content}</Card.Text>
-            <Link to={`/posts/${post.id}`}>
-              <Button variant="primary">Read more</Button>
+            <Link to={`/posts/find/${post._id}`}>
+              <Button variant="primary" onClick={() => {}}>
+                Read more
+              </Button>
             </Link>
           </Card.Body>
         </Card>

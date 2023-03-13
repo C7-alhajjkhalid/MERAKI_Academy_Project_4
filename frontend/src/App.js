@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import PostList from "./components/PostList";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Subscribed from "./components/Subscribed";
+import Post from "./components/Post";
 export const GlobalContext = createContext();
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <div className="mainContainer">
           <div>
             <Routes>
+            <Route path="/posts/find/:id" element={<Post />} />
               <Route path="/login" element={<Login />} />
               <Route path="/all" element={<Home />} />
               <Route path="/subscribed" element={<Subscribed />} />

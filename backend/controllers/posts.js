@@ -17,7 +17,6 @@ const newPost = (req, res) => {
 };
 
 const getAllPosts = (req, res) => {
-  console.log("hi");
   postsModel
     .find()
     .populate("subreddit")
@@ -44,7 +43,9 @@ const getPostsBySubId = (req, res) => {
 };
 
 const getPostById = (req, res) => {
+  console.log("h")
   const postId = req.params.id;
+  console.log(postId);
   postsModel
     .findById(postId)
     .populate("subreddit", "name")
