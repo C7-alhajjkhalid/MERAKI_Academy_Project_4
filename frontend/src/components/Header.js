@@ -25,6 +25,7 @@ const Header = () => {
             {context.token ? (
               <Nav.Link href="/subscribed">Subscribed</Nav.Link>
             ) : null}
+             <Nav.Link href="/Subreddits">Subreddits</Nav.Link>
           </Nav>
           <Nav>
             {!context.token ? <Nav.Link href="/login">Login</Nav.Link> : null}

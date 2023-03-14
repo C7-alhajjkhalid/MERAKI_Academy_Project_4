@@ -3,6 +3,7 @@ import React, { useState, createContext, useEffect } from "react";
 import Login from "./components/Login";
 import Home from "./components/AllPosts";
 import axios from "axios";
+import Subreddits from "./components/Subreddits";
 import Register from "./components/Register";
 import Header from "./components/Header";
 import PostList from "./components/PostList";
@@ -44,8 +45,9 @@ function App() {
         <div className="mainContainer">
           <div>
             <Routes>
-            <Route path="/posts/find/:id" element={<Post />} />
+              <Route path="/posts/find/:id" element={<Post />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/Subreddits" element={<Subreddits />} />
               <Route path="/all" element={<Home />} />
               <Route path="/subscribed" element={<Subscribed />} />
               <Route path="/register" element={<Register />} />

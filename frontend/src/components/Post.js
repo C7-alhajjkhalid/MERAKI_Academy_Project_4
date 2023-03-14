@@ -105,7 +105,9 @@ const Post = () => {
                   )
 
                   .then((result) => {
-                    console.log("success");
+                    postDetails.comments.push(result);
+                    const newArr = postDetails;
+                    setPostDetails(newArr);
                   })
                   .catch((err) => {
                     throw err;
