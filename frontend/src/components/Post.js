@@ -63,7 +63,7 @@ const Post = () => {
           <ListGroup>
             {postDetails.comments.map((comment) => {
               return (
-                <ListGroupItem>
+                <ListGroupItem key={comment._id}>
                   <strong>{comment.author}</strong>
                   <p>{comment.content}</p>
                 </ListGroupItem>
@@ -82,7 +82,7 @@ const Post = () => {
               <Form.Control
                 as="textarea"
                 rows={3}
-                placeholder="Enter your comment"
+                placeholder="Write your comment"
                 onChange={(e) => {
                   setNewComment(e.target.value);
                 }}
@@ -94,7 +94,6 @@ const Post = () => {
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-         
                 axios
                   .post(
                     "http://localhost:5000/comments",

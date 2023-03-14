@@ -2,9 +2,11 @@ const commentsModel = require("../models/CommentSchema");
 const Post = require("../models/PostSchema");
 
 const newComment = async (req, res) => {
+  console.log("testttt");
   try {
     const { content, post } = req.body;
     const author = req.userId;
+
     const postExists = await Post.exists({ _id: post });
     if (!postExists) {
       return res.status(404).json({ error: "Post not found" });

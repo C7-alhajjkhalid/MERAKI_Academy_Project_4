@@ -10,7 +10,7 @@ const PostList = ({ posts }) => {
   return (
     <div>
       {posts.map((post) => (
-        <Card key={post.id} className="postCard">
+        <Card key={post._id} className="postCard">
           <Card.Body>
             <Card.Title>{post.title}</Card.Title>
             <Card.Text>{post.content}</Card.Text>
