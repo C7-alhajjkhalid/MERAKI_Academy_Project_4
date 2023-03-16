@@ -14,7 +14,7 @@ const authentication = require("../middleware/authentication");
 postsRouter.post("/", authentication, newPost);
 postsRouter.get("/", getAllPosts);
 postsRouter.get("/subscribed", authentication, getSubscribedPosts);
-postsRouter.get("/:subId", getPostsBySubId);
+postsRouter.get("/:subId", authentication, getPostsBySubId);
 postsRouter.get("/find/:id", getPostById);
 postsRouter.delete("/:id", deletePostById);
 postsRouter.put("/:id", updatePostById);

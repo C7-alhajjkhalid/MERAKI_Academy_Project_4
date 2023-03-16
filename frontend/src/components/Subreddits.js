@@ -31,6 +31,7 @@ const Subreddits = () => {
 
   return (
     <>
+    
       {subreddits.map((sub, index) => (
         <Card key={sub._id} className="postCard">
           <Card.Body>

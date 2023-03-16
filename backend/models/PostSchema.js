@@ -4,14 +4,10 @@ const postSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    minlength: 10,
-    maxlength: 20,
   },
   content: {
     type: String,
     required: true,
-    minlength: 50,
-    maxlength: 5000,
   },
   subreddit: {
     type: mongoose.Schema.Types.ObjectId,

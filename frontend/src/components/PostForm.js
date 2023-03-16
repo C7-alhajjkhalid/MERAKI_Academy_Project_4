@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useContext } from "react";
 import { Form, Button } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { GlobalContext } from "../App";
+import { useParams } from "react-router-dom";
 
 const PostForm = ({ onSubmit }) => {
+  const context = useContext(GlobalContext);
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
   };
 
   const handleBodyChange = (value) => {
@@ -17,7 +22,15 @@ const PostForm = ({ onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ title, body });
+    console.log(id);
+
+    onSubmit(
+      axios.post(
+        `http://localhost:5000/posts`,
+        { title, content: body, subreddit: id },
+        { headers: { Authorization: `Bearer ${context.token}` } }
+      )
+    );
     setTitle("");
     setBody("");
   };
