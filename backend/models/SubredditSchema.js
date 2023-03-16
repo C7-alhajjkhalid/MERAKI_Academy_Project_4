@@ -5,14 +5,10 @@ const subredditSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    minlength: 3,
-    maxlength: 30,
   },
   description: {
     type: String,
     required: true,
-    minlength: 10,
-    maxlength: 500,
   },
   createdAt: {
     type: Date,

@@ -23,7 +23,7 @@ const PostsBySub = () => {
   }, []);
 
   if (!subName) {
-    return <p>loading</p>;
+    return <h1>This Subreddit is still empty</h1>;
   }
 
   return (
