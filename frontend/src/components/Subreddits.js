@@ -12,30 +12,38 @@ import {
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { GlobalContext } from "../App";
+import { Link } from "react-router-dom";
 
 const Subreddits = () => {
-  const [subreddits, setSubreddits] = useState();
+  const [subreddits, setSubreddits] = useState([]);
 
   useEffect(() => {
-   
     axios
       .get("http://localhost:5000/subreddit/all")
       .then((result) => {
-       
         setSubreddits(result.data.result);
+        console.log(subreddits);
       })
       .catch((err) => {
         throw err;
       });
-   
   }, []);
 
   return (
-    <Container>
+    <>
       {subreddits.map((sub, index) => (
-        <h1 key={sub._id}>{sub.name}</h1>
+        <Card key={sub._id} className="postCard">
+          <Card.Body>
+            <Card.Title>{sub.name}</Card.Title>
+            <Link to={`/subreddit/${sub._id}`}>
+              <Button variant="primary" onClick={() => {}}>
+                Go to Subreddit
+              </Button>
+            </Link>
+          </Card.Body>
+        </Card>
       ))}
-    </Container>
+    </>
   );
 };
 

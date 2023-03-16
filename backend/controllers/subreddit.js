@@ -42,9 +42,19 @@ const getAllSubreddits = (req, res) => {
     });
 };
 
-// const getSubredditById = (req, res) => {
-//   const subId =
-// };
+const getSubredditById = (req, res) => {
+  const subId = req.params.id;
+  console.log("hello world");
+  Posts.find({ subreddit: subId })
+    .populate("subreddit")
+
+    .then((result) => {
+      res.status(200).json({ success: true, result });
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 
 //needs update
 const deleteSubredditById = (req, res) => {
@@ -80,7 +90,7 @@ module.exports = {
   newSubreddit,
   getSubscribedSubreddits,
   getAllSubreddits,
-  // getSubredditById,
+  getSubredditById,
   deleteSubredditById,
   updateSubredditById,
 };

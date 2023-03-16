@@ -105,7 +105,7 @@ const Post = () => {
                   )
 
                   .then((result) => {
-                    postDetails.comments.push(result);
+                    postDetails.comments.push( result );
                     const newArr = postDetails;
                     setPostDetails(newArr);
                   })
