@@ -36,6 +36,11 @@ const PostsBySub = () => {
               New Post
             </Button>
           </Link>
+          <Button variant="primary" onClick={(e) => {
+            
+          }}>
+            Subscribe
+          </Button>
         </div>
         <PostList posts={context.postsBySub} />
       </div>

@@ -1,5 +1,6 @@
 const subredditModel = require("../models/SubredditSchema");
 const Posts = require("../models/PostSchema");
+const User = require("../models/UserSchema");
 
 const newSubreddit = (req, res) => {
   const { name, description } = req.body;
@@ -86,6 +87,48 @@ const updateSubredditById = (req, res) => {
     });
 };
 
+const subscribeToSubreddit = async (req, res, next) => {
+  const { subredditId } = req.body;
+  const userId = req.userId;
+
+  try {
+    const user = await User.findById(userId);
+    const subreddit = await subredditModel.findById(subredditId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!subreddit) {
+      return res.status(404).json({ message: "Subreddit not found" });
+    }
+
+    if (user.subreddits.includes(subredditId)) {
+      return res
+        .status(409)
+        .json({ message: "User is already subscribed to this subreddit" });
+    }
+
+    user.subreddits.push(subredditId);
+    subreddit.members.push(user._id);
+
+    await user.save();
+    await subreddit.save();
+
+    res.status(200).json({
+      message: "User has subscribed to the subreddit",
+      user,
+      subreddit,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  subscribeToSubreddit,
+};
+
 module.exports = {
   newSubreddit,
   getSubscribedSubreddits,
@@ -93,4 +136,5 @@ module.exports = {
   getSubredditById,
   deleteSubredditById,
   updateSubredditById,
+  subscribeToSubreddit,
 };
