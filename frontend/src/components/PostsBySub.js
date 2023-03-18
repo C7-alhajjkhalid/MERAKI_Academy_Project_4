@@ -46,7 +46,7 @@ const PostsBySub = () => {
               New Post
             </Button>
           </Link>
-          <SubscribeButton subredditId={id} />
+          {/* <SubscribeButton subredditId={id} /> */}
         </div>
         <PostList posts={context.postsBySub} />
       </div>
