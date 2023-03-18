@@ -48,10 +48,10 @@ const getPostById = (req, res) => {
   console.log(postId);
   postsModel
     .findById(postId)
-    .populate("subreddit", "name")
-    .populate("author", "username")
-    .populate("upvotes", "username")
-    .populate("downvotes", "username")
+    .populate("subreddit")
+    .populate("author")
+    .populate("upvotes")
+    .populate("downvotes")
     .populate("comments")
     .exec()
     .then((result) => {

@@ -19,7 +19,6 @@ const Post = () => {
   const { id } = useParams();
   const [postDetails, setPostDetails] = useState();
   const [newComment, setNewComment] = useState("");
-  const [date, setDate] = useState("");
 
   useEffect(() => {
     axios
@@ -35,7 +34,7 @@ const Post = () => {
   if (!postDetails) {
     return <p>loading</p>;
   }
-
+  console.log(postDetails);
   return (
     <Container className="my-3">
       <Row>
@@ -48,10 +47,14 @@ const Post = () => {
                 dangerouslySetInnerHTML={{ __html: postDetails.content }}
               />
             </Card.Body>
+            {/* {!context.token ? <Nav.Link href="/login">Login</Nav.Link> : null} */}
             <ListGroup className="list-group-flush">
-              <ListGroupItem>
-                Username: {postDetails.author.username}
-              </ListGroupItem>
+              {postDetails.author ? (
+                <ListGroupItem>Username: "hi"</ListGroupItem>
+              ) : (
+                <p>User deleted his account</p>
+              )}
+
               <ListGroupItem>
                 Published On: {postDetails.createdAt}
               </ListGroupItem>
@@ -114,9 +117,9 @@ const Post = () => {
                     )
 
                     .then((result) => {
-                      postDetails.comments.push(result);
-                      const newArr = postDetails;
-                      setPostDetails(newArr);
+                      // postDetails.comments.push(result);
+                      // const newArr = postDetails;
+                      // setPostDetails(newArr);
                     })
                     .catch((err) => {
                       throw err;

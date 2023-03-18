@@ -41,7 +41,7 @@ const Login = () => {
         setAlert("success");
         setAlertmsg("Logged in successfully");
         setTimeout(() => {
-          navigate("/home");
+          navigate("/subscribed");
         }, 3000);
       })
       .catch((err) => {

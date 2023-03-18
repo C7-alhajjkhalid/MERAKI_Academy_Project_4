@@ -88,7 +88,8 @@ const updateSubredditById = (req, res) => {
 };
 
 const subscribeToSubreddit = async (req, res, next) => {
-  const { subredditId } = req.body;
+  const subredditId = req.params.id;
+
   const userId = req.userId;
 
   try {
@@ -121,7 +122,7 @@ const subscribeToSubreddit = async (req, res, next) => {
       subreddit,
     });
   } catch (err) {
-    next(err);
+    res.status(400).json(err);
   }
 };
 

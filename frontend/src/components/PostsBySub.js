@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { GlobalContext } from "../App";
 import axios from "axios";
 import PostList from "./PostList";
+import SubscribeButton from "./SubscribeButton";
 import { Navbar, Container, Button } from "react-bootstrap";
 
 const PostsBySub = () => {
@@ -23,7 +24,16 @@ const PostsBySub = () => {
   }, []);
 
   if (!subName) {
-    return <h1>This Subreddit is still empty</h1>;
+    return (
+      <>
+        <h1>This Subreddit is still empty</h1>
+        <Link to={`/posts/new/${id}`}>
+          <Button variant="primary" onClick={() => {}}>
+            Add the first Post
+          </Button>
+        </Link>
+      </>
+    );
   }
 
   return (
@@ -36,11 +46,7 @@ const PostsBySub = () => {
               New Post
             </Button>
           </Link>
-          <Button variant="primary" onClick={(e) => {
-            
-          }}>
-            Subscribe
-          </Button>
+          <SubscribeButton subredditId={id} />
         </div>
         <PostList posts={context.postsBySub} />
       </div>

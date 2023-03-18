@@ -59,18 +59,30 @@ const Subreddits = () => {
       <br />
       {context.token ? (
         <div>
-          <input
-            placeholder="New Subreddit Name"
-            onChange={(e) => {
-              setSubName(e.target.value);
-            }}
-          ></input>
-          <input
-            placeholder="New Subreddit Description"
-            onChange={(e) => {
-              setSubDescription(e.target.value);
-            }}
-          ></input>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Subreddit</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="New Subreddit Name"
+                onChange={(e) => {
+                  setSubName(e.target.value);
+                }}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="New Subreddit Description"
+                onChange={(e) => {
+                  setSubDescription(e.target.value);
+                }}
+              />
+            </Form.Group>
+          </Form>
+
           <Button
             variant="danger"
             onClick={(e) => {
