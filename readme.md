@@ -76,13 +76,17 @@ Now app ready to use
 
 ## 🎈 Usage <a name="usage"></a>
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+While you can use the website without having an account it is recommended that you create one so you can have the ability to create subreddits, posts and comments.
 
-Ex.
+To use this Reddit clone, you will need to start by creating an account on the Register page. Here you will need to provide your email, password, and username. Once you have created your account, you can log in using your email and password on the Login page.
 
-- You don't have to register to navigate our web app
-- You can click on the **Home** tab provided in the navigation bar to view the home section
-- You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
+After logging in, you will be directed to the All Posts page, where you can view all posts from all subreddits. If you want to see posts from only the subreddits you have subscribed to, you can navigate to the Subscribed page.
+
+To explore different subreddits, go to the Subreddits page. Here, you will find a list of all subreddits available on the site. Clicking on a subreddit will take you to that subreddit's page, where you can view posts related only to that subreddit. You can also create your own subreddit from this page.
+
+To publish your own post, navigate to the Publish Post page. Here, you can create and submit your post to the site.
+
+Finally, if you want to view the details of a specific post, you can visit the Post page. This page will showcase the post along with its comments, author, and date of publication.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
