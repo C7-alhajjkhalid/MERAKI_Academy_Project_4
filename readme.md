@@ -4,7 +4,7 @@
  </a>
 </p>
 
-<h3 align="center">Project Title
+<h3 align="center">Reddit Clone
 </h3>
 
 ---
